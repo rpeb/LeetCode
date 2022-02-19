@@ -9,7 +9,7 @@ public:
             pq.push(i);
         }
         int diff = numeric_limits<int>::max();
-        while (!(pq.top() & 1)) {
+        while (pq.top()%2==0) {
             int maxVal = pq.top();
             pq.pop();
             diff = min(diff, maxVal - minVal);
