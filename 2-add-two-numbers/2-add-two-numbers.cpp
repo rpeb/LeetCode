@@ -30,7 +30,6 @@ public:
         
         // start iterating both lists from second node
         while (head1 != nullptr or head2 != nullptr) {
-            // cout << "carry in while = " << carry << "\n";
             int f = 0, s = 0;
             if (head1 != nullptr) {
                 f = head1->val;
@@ -46,7 +45,6 @@ public:
             resTail->next = new ListNode(sum);
             resTail = resTail->next;
         }
-        cout << "carry after while = " << carry << "\n";
         if (carry) {
             resTail->next = new ListNode(carry);
         }
