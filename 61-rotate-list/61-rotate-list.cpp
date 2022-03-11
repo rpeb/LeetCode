@@ -21,11 +21,11 @@ int getNumberOfNodes(ListNode* head) {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
         if (!head) return head;
+        ListNode *q = head, *r = head;
         int n = getNumberOfNodes(head);
         // cout << "numberOfNodes: " << n << "\n";
         k = k % n;
         if (!k) return head;
-        ListNode *q = head, *r = head;
         int skip = k-1;
         while(skip>0) {
             r = r->next;
