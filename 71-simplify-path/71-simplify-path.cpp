@@ -1,15 +1,15 @@
 class Solution {
-void populateStackFromVector(vector<string>& v, stack<string>& st) {
-    for (auto x: v) {
-            if (x == "." || (x == ".." && st.empty())) {
-                continue;
-            } else if (x == "..") {
-                st.pop();
-            } else {
-                st.push(x);
+    void populateStackFromVector(vector<string>& v, stack<string>& st) {
+        for (auto x: v) {
+                if (x == "." || (x == ".." && st.empty())) {
+                    continue;
+                } else if (x == "..") {
+                    st.pop();
+                } else {
+                    st.push(x);
+                }
             }
-        }
-}
+    }
     void parsePathToDirectories(string& path, vector<string>& v) {
         string tmp;
         int n = path.size();
