@@ -10,12 +10,9 @@ void populateStackFromVector(vector<string>& v, stack<string>& st) {
             }
         }
 }
-public:
-    string simplifyPath(string path) {
-        int n = path.size();
-        vector<string> v;
+    void parsePathToDirectories(string& path, vector<string>& v) {
         string tmp;
-        stack<string> st;
+        int n = path.size();
         for (int i = 0; i < n; ++i) {
             if (path[i] != '/') {
                 tmp += path[i];
@@ -28,8 +25,14 @@ public:
         if (!tmp.empty()) {
             v.push_back(tmp);
         }
-        tmp="";
+    }
+public:
+    string simplifyPath(string path) {
+        vector<string> v;
+        stack<string> st;
+        parsePathToDirectories(path,v);
         populateStackFromVector(v,st);
+        string tmp;
         while (!st.empty()) {
             tmp = st.top() + "/" + tmp;
             st.pop();
