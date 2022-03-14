@@ -28,16 +28,38 @@ class Solution {
     }
 public:
     string simplifyPath(string path) {
+        path += "/";
+        int n = path.size();
         vector<string> v;
-        stack<string> st;
-        parsePathToDirectories(path,v);
-        populateStackFromVector(v,st);
         string tmp;
-        while (!st.empty()) {
-            tmp = st.top() + "/" + tmp;
-            st.pop();
+        
+        for (int i = 0; i < n; ++i) {
+            if (path[i] == '/') {
+                if (!tmp.empty()) {
+                    cout << "tmp = " << tmp << "\n";
+                    if (tmp == "..") {
+                        if (!v.empty())
+                            v.pop_back();
+                    }
+                    else if (tmp != ".") 
+                        v.push_back(tmp);
+                    tmp = "";
+                }
+            } else {
+                tmp += path[i];
+            }
         }
-        tmp = "/" + tmp;
-        return (tmp=="/") ? "/" : tmp.substr(0,tmp.size()-1);
+        
+        if (!tmp.empty()) 
+            v.push_back(tmp);
+        
+        string res;
+        
+        for (string& s: v) {
+            cout << s << "\n";
+            res += "/" + s;
+        }
+        
+        return res.empty() ? "/" : res;
     }
 };
