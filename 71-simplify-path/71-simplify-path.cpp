@@ -1,4 +1,15 @@
 class Solution {
+void populateStackFromVector(vector<string>& v, stack<string>& st) {
+    for (auto x: v) {
+            if (x == "." || (x == ".." && st.empty())) {
+                continue;
+            } else if (x == "..") {
+                st.pop();
+            } else {
+                st.push(x);
+            }
+        }
+}
 public:
     string simplifyPath(string path) {
         int n = path.size();
@@ -18,15 +29,7 @@ public:
             v.push_back(tmp);
         }
         tmp="";
-        for (auto x: v) {
-            if (x == "." || (x == ".." && st.empty())) {
-                continue;
-            } else if (x == "..") {
-                st.pop();
-            } else {
-                st.push(x);
-            }
-        }
+        populateStackFromVector(v,st);
         while (!st.empty()) {
             tmp = st.top() + "/" + tmp;
             st.pop();
