@@ -1,7 +1,6 @@
 class Solution {
     bool isVowel(char c) {
         char vowels[] = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
-        // cout << "c = " << c << "\n";
         for (int i = 0; i < 10; ++i) {
             if (c == vowels[i]) return true;
         }
