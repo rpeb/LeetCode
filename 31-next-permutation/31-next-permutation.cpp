@@ -10,7 +10,6 @@ public:
         if (i == 0) {
             reverse(nums.begin(), nums.end());
         } else {
-            // cout << "i = " << i << "\n";
             int j = i;
             i--;
             int mx = INT_MAX, g = i;
@@ -21,7 +20,6 @@ public:
                 }
                 j++;
             }
-            // cout << "i = " << i << ", g = " << g << "\n";
             swap(nums[i], nums[g]);
             reverse(nums.begin() + i + 1, nums.end());
         }
