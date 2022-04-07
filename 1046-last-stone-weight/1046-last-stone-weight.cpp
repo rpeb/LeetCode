@@ -13,7 +13,6 @@ public:
             if (first != second) {
                 q.push(abs(first-second));
             }
-            // cout << q.size() << "\n";
         }
         return q.empty() ? 0 : q.top();
     }
