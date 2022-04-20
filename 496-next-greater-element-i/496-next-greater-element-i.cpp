@@ -13,11 +13,9 @@ public:
                 }
                 j++;
             }
-            // cout << "j = " << j << "\n";
             while (j < n2 && nums2[j] < nums1[i]) {
                 j++;
             }   
-            // cout << "j = " << j << "\n";
             int nextGreaterInt = (j == n2) ? -1 : nums2[j];
             res.push_back(nextGreaterInt);
         }
