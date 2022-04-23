@@ -18,7 +18,7 @@ class MyHashMap {
     
 public:
     MyHashMap() {
-        size = 10;
+        size = 200;
         map.resize(size);
     }
     
