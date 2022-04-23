@@ -1,6 +1,5 @@
 class Solution {
     vector<list<pair<int,int>>> map;
-    
 public:
 
     // Encodes a URL to a shortened URL.
@@ -10,12 +9,10 @@ public:
         int n = longUrl.size();
         for (int i = 0; i < n; ++i) {
             char x = longUrl[i];
-            // cout << "x = " << x << "\n";
             int hash = ((x - 'a') + 97) % 10;
             encoded += to_string(hash);
             map[hash].push_back({i,x});
         }
-        cout << encoded << "\n";
         return encoded;
     }
 
