@@ -1,31 +1,52 @@
 class MyHashMap {
-    vector<int> map;
+    vector<list<pair<int,int>>> map;
+    int size;
+    
+    int hash(int key) {
+        return key % size;
+    }
+    
+    auto search(int key) {
+        int i = hash(key);
+        for (auto it = map[i].begin(); it != map[i].end(); ++it) {
+            if (it->first == key) {
+                return it;
+            }
+        }
+        return map[i].end();
+    }
+    
 public:
     MyHashMap() {
-        map.assign(1,-1);
+        size = 200;
+        map.resize(size);
     }
     
     void put(int key, int value) {
-        int size = map.size() - 1;
-        if (key > size) {
-            map.resize(key + 1, -1);
+        remove(key);
+        int i = hash(key);
+        auto it = search(key);
+        if (it == map[i].end()) {
+            map[i].push_back({key,value});
         }
-        map[key] = value;
     }
     
     int get(int key) {
-        int size = map.size() - 1;
-        if (key > size) {
-            return -1;
+        int i = hash(key);
+        for (auto it = map[i].begin(); it != map[i].end(); ++it) {
+            if (it->first == key) {
+                return it->second;
+            }
         }
-        return map[key];
+        return -1;
     }
     
     void remove(int key) {
-        int size = map.size() - 1;
-        if (key <= size) {
-            map[key] = -1;
-        }   
+        int i = hash(key);
+        auto it = search(key);
+        if (it != map[i].end()) {
+            map[i].erase(it);
+        }
     }
 };
 
