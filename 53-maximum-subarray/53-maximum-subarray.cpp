@@ -5,6 +5,7 @@ public:
         int n = nums.size();
         int m = INT_MIN;
         bool allNegative = true;
+        int maxElement = INT_MIN;
         for (int i = 0; i < n; ++i) {
             if (nums[i] >= 0) {
                 allNegative = false;
@@ -13,7 +14,9 @@ public:
             m = max(m,s);
             if (s < 0)
                 s = 0;
+            
+            maxElement = max(maxElement, nums[i]);
         }
-        return allNegative ? *max_element(nums.begin(), nums.end()) : m;
+        return allNegative ? maxElement : m;
     }
 };
