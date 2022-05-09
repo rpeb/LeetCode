@@ -1,41 +1,38 @@
 class Solution {
 public:
     int merge(vector<int>& left, vector<int>& right, vector<int>& v) {
-	int leftSize = left.size();
-	int rightSize = right.size();
-	int i = 0, j = 0, k = 0;
-	int inversions = 0;
-    while (i < leftSize && j < rightSize) {
-        if ((long)left[i] > (long) 2 * right[j]) {
-            inversions += leftSize - i;
-            j++;
-        } else {
-            i++;
+        int leftSize = left.size();
+        int rightSize = right.size();
+        int i = 0, j = 0, k = 0;
+        int revPairs = 0;
+        while (i < leftSize && j < rightSize) {
+            if ((long)left[i] > (long) 2 * right[j]) {
+                revPairs += leftSize - i;
+                j++;
+            } else {
+                i++;
+            }
         }
+        i = 0;
+        j = 0;
+        while (i < leftSize && j < rightSize) {
+            if (left[i] <= right[j]) {
+                v[k] = left[i];
+                i++;
+            } else {
+                v[k] = right[j];
+                j++; 
+            }
+            k++;
+        }
+        while (i < leftSize) {
+            v[k++] = left[i++];
+        }
+        while (j < rightSize) {
+            v[k++] = right[j++];
+        }
+        return revPairs;
     }
-    i = 0;
-    j = 0;
-	while (i < leftSize && j < rightSize) {
-		if (left[i] <= right[j]) {
-			v[k] = left[i];
-            i++;
-		} else {
-			v[k] = right[j];
-			// int m = 0;
-			// while (m < leftSize && left[m] <= 2 * right[j]) m++;
-			// inversions += leftSize - m;
-            j++; 
-		}
-        k++;
-	}
-	while (i < leftSize) {
-		v[k++] = left[i++];
-	}
-	while (j < rightSize) {
-		v[k++] = right[j++];
-	}
-	return inversions;
-}
     
     int mergeSort(vector<int>& nums) {
         int n = nums.size();
