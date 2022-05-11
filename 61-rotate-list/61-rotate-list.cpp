@@ -9,37 +9,28 @@
  * };
  */
 class Solution {
-int getNumberOfNodes(ListNode* head) {
-    int cnt = 0;
-    ListNode *q = head;
-    while (q != nullptr) {
-        cnt++;
-        q = q->next;
-    }
-    return cnt;
-}
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-        if (!head) return head;
-        ListNode *q = head, *r = head;
-        int n = getNumberOfNodes(head);
-        k = k % n;
-        if (!k) return head;
-        int skip = k-1;
-        while(skip>0) {
-            r = r->next;
-            skip--;
+        if (!head) return nullptr;
+        ListNode* p = head;
+        int len = 1;
+        while (p->next != nullptr) {
+            p = p->next;
+            len++;
         }
-        while (r != nullptr && r->next != nullptr) {
-            q = q->next;
-            r = r->next;
+        k = k % len;
+        if (k == 0) return head;
+        p->next = head;
+        cout << "p->val = " << p->val << ", p->next->val = " << p->next->val << "\n";
+        p = head;
+        int nullAfter = len - k -1;
+        while (nullAfter--) {
+            p = p->next;
         }
-        r->next = head;
-        ListNode* it = q;
-        while (n-- > 1) {
-            it = it->next;
-        }
-        it->next = nullptr;
-        return q;
+        cout << "p->val = " << p->val << ", p->next->val = " << p->next->val << "\n";
+
+        ListNode* newHead = p->next;
+        p->next = nullptr;
+        return newHead;
     }
 };
