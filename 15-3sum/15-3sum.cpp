@@ -7,15 +7,16 @@ public:
         if (n < 3) return res;
         sort(nums.begin(), nums.end());
         int i = 0, j, k;
-        while (i < n-2) {
-            j = i + 1;
+        while (i++ < n-2) {
+            int i2 = i-1;
+            if (i2 > 0 && nums[i2] == nums[i2-1]) continue;
+            j = i2 + 1;
             k = n - 1;
-            // int req = 0 - nums[i];
             vector<int> temp;
             while (j < k) {
-                int sum = nums[i] + nums[j] + nums[k];
+                int sum = nums[i2] + nums[j] + nums[k];
                 if (sum == 0) {
-                    temp = {nums[i],nums[j],nums[k]};
+                    temp = {nums[i2],nums[j],nums[k]};
                     if (s.find(temp) == s.end()) {
                         res.push_back(temp);
                         s.insert(temp);
@@ -27,7 +28,7 @@ public:
                     k--;
                 }
             }
-            i++;
+            // i++;
         }
         return res;
     }
