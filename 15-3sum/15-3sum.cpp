@@ -6,16 +6,15 @@ public:
         if (n < 3) return res;
         sort(nums.begin(), nums.end());
         int i = 0, j, k;
-        while (i++ < n-2) {
-            int i2 = i-1;
-            if (i2 > 0 && nums[i2] == nums[i2-1]) continue;
-            j = i2 + 1;
+        for (int i = 0; i < n; ++i) {
+            if (i > 0 && nums[i] == nums[i-1]) continue;
+            j = i + 1;
             k = n - 1;
             vector<int> temp;
             while (j < k) {
-                int sum = nums[i2] + nums[j] + nums[k];
+                int sum = nums[i] + nums[j] + nums[k];
                 if (sum == 0) {
-                    temp = {nums[i2],nums[j],nums[k]};
+                    temp = {nums[i],nums[j],nums[k]};
                     res.push_back(temp);
                     while (j < k && nums[j] == nums[j+1]) j++;
                     while (k > j && nums[k-1] == nums[k]) k--;
