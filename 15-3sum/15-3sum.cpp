@@ -17,11 +17,15 @@ public:
                 int sum = nums[i2] + nums[j] + nums[k];
                 if (sum == 0) {
                     temp = {nums[i2],nums[j],nums[k]};
-                    if (s.find(temp) == s.end()) {
-                        res.push_back(temp);
-                        s.insert(temp);
-                    }
-                    j++;
+                    // if (s.find(temp) == s.end()) {
+                    //     res.push_back(temp);
+                    //     s.insert(temp);
+                    // }
+                    res.push_back(temp);
+                    while (j < k && nums[j] == nums[j+1]) j++;
+                    while (k > j && nums[k-1] == nums[k]) k--;
+                    if (j < n-1) j++;
+                    if (k > 0) k--;
                 } else if (sum < 0) {
                     j++;
                 } else {
