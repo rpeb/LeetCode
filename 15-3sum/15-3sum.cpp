@@ -5,11 +5,10 @@ public:
         int n = nums.size();
         if (n < 3) return res;
         sort(nums.begin(), nums.end());
-        int i = 0, j, k;
         for (int i = 0; i < n; ++i) {
             if (i > 0 && nums[i] == nums[i-1]) continue;
-            j = i + 1;
-            k = n - 1;
+            int j = i + 1;
+            int k = n - 1;
             vector<int> temp;
             while (j < k) {
                 int sum = nums[i] + nums[j] + nums[k];
