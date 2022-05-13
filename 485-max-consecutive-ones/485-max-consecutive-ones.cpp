@@ -18,9 +18,8 @@ public:
                 i = j;
             }
         }
-        if (nums.back() == 1) {
-            res = max(res, count);
-        }
+        
+        res = max(res, count);
         return res;
     }
 };
