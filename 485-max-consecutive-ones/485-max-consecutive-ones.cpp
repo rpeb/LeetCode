@@ -4,8 +4,7 @@ public:
         int count = 0, res = 0;
         for (int num: nums) {
             if (num == 1) {
-                count++;
-                res = max(count, res);
+                res = max(++count, res);
             } else {
                 count = 0;
             }
