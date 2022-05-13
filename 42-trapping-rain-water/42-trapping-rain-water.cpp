@@ -7,18 +7,12 @@ public:
         int res = 0;
         while (l < r) {
             if (height[l] <= height[r]) {
-                if (height[l] < leftMax) {
-                    res += leftMax - height[l];
-                } else {
-                    leftMax = height[l];
-                }
+                leftMax = max(leftMax, height[l]);
+                res += leftMax - height[l];
                 l++;
             } else {
-                if (height[r] < rightMax) {
-                    res += rightMax - height[r];
-                } else {
-                    rightMax = height[r];
-                }
+                rightMax = max(rightMax, height[r]);
+                res += rightMax - height[r];
                 r--;
             }
         }
