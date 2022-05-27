@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void solve(vector<int>& nums, vector<int> temp, int i, int target, vector<vector<int>>& res) {
+    void solve(vector<int>& nums, vector<int>& temp, int i, int target, vector<vector<int>>& res) {
         // base
         if (i == nums.size()) {
             if (target == 0) {
@@ -17,6 +17,7 @@ public:
             // include
             temp.push_back(nums[i]);
             solve(nums, temp, i, target - nums[i], res);
+            temp.pop_back();
         }
     }
     
