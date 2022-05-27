@@ -1,28 +1,30 @@
 class Solution {
 public:
-    void combinationSumHelper(vector<int>& c, int target, int sum, int idx, vector<int>& v, vector<vector<int>>& ans) {
-        if (idx >= c.size()) return;
-        if (sum + c[idx] == target) {
-            v.push_back(c[idx]);
-            ans.push_back(v);
+    void solve(vector<int>& nums, vector<int> temp, int i, int target, vector<vector<int>>& res) {
+        // base
+        if (i == nums.size()) {
+            if (target == 0) {
+                res.push_back(temp);
+            }
             return;
         }
-        if (sum + c[idx] < target) {
-            vector<int> tmp1 = v;
-            vector<int> tmp2 = v;
-            tmp2.push_back(c[idx]);
-            combinationSumHelper(c,target,sum+c[idx],idx,tmp2,ans);
-            combinationSumHelper(c,target,sum,idx+1,tmp1,ans);
+        
+        if (nums[i] > target) {
+            solve(nums, temp, i + 1, target, res);
         } else {
-            combinationSumHelper(c,target,sum,idx+1,v,ans);
+            // exclude
+            solve(nums, temp, i + 1, target, res);
+            // include
+            temp.push_back(nums[i]);
+            solve(nums, temp, i, target - nums[i], res);
         }
     }
     
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        sort(candidates.begin(),candidates.end());
-        vector<int> v;
-        vector<vector<int>> ans;
-        combinationSumHelper(candidates,target,0,0,v,ans);
-        return ans;
+    vector<vector<int>> combinationSum(vector<int>& nums, int target) {
+        vector<vector<int>> res;
+        vector<int> temp;
+        int i = 0;
+        solve(nums, temp, i, target, res);
+        return res;
     }
 };
