@@ -1,1 +1,3 @@
-​
+- choose element
+- iterate through decision space
+- restore the state (*unpick*)
