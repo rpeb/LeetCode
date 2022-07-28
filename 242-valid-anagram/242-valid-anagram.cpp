@@ -12,7 +12,6 @@ public:
         for (int i = 0; i < n1; ++i) {
             m[s[i]-'a']++;
         }
-        printVec(m);
         for (int i = 0; i < n2; ++i) {
             if (m[t[i]-'a'] > 0) {
                 m[t[i]-'a']--;
@@ -24,8 +23,6 @@ public:
             if (m[i] != 0)
                 return false;
         }
-        cout << "========================\n";
-        printVec(m);
         return true;
     }
 };
