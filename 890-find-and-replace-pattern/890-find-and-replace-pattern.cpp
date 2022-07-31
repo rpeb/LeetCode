@@ -17,8 +17,6 @@ public:
             patternVector[offset].push_back(i);
         }
         sort(patternVector.begin(), patternVector.end());
-        cout << "patternVector==========\n";
-        printVector(patternVector);
         vector<string> res;
         for (string word: words) {
             vector<vector<int>> matchVector(26);
@@ -28,12 +26,9 @@ public:
                 matchVector[offset].push_back(i);
             }
             sort(matchVector.begin(), matchVector.end());
-            cout << "matchVector============\n";
-            printVector(matchVector);
             if (patternVector == matchVector) {
                 res.push_back(word);
             }
-            // matchVector.clear();
         }
         return res;
     }
