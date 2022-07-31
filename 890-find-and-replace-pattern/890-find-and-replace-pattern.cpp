@@ -1,32 +1,27 @@
 class Solution {
-    void printVector(vector<vector<int>>& v) {
-        for (vector<int> vint: v) {
-            for (int i: vint) {
-                cout << i << " ";
+    string getPatternString(string pattern) {
+        unordered_map<char,int> m;
+        string patternToInteger;
+        int cnt = 0;
+        for (char c: pattern) {
+            if (m.find(c) == m.end()) {
+                m[c] = cnt++;
+                patternToInteger += to_string(m[c]);
             }
-            cout << "\n";
+            else {
+                patternToInteger += to_string(m[c]);
+            }
         }
+        // cout << "patternToInteger = " << patternToInteger << "\n";
+        return patternToInteger;
     }
 public:
     vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
-        vector<vector<int>> patternVector(26);
-        int patternLength = pattern.size();
-        int offset;
-        for (int i = 0; i < patternLength; ++i) {
-            offset = pattern[i] - 'a';
-            patternVector[offset].push_back(i);
-        }
-        sort(patternVector.begin(), patternVector.end());
         vector<string> res;
+        string intCodeForPattern = getPatternString(pattern);
         for (string word: words) {
-            vector<vector<int>> matchVector(26);
-            int wordLength = word.size();
-            for (int i = 0; i < wordLength; ++i) {
-                offset = word[i] - 'a';
-                matchVector[offset].push_back(i);
-            }
-            sort(matchVector.begin(), matchVector.end());
-            if (patternVector == matchVector) {
+            string intCodeForWord = getPatternString(word);
+            if (intCodeForPattern == intCodeForWord) {
                 res.push_back(word);
             }
         }
