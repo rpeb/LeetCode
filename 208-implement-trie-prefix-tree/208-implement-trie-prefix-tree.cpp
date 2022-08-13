@@ -1,19 +1,17 @@
 struct TrieNode {
-    TrieNode* children[26];
+    vector<TrieNode*> children;
     bool endOfWord;
     TrieNode() {
         endOfWord = false;
-        for (int i = 0; i < 26; ++i) {
-            children[i] = nullptr;
-        }
+        children.assign(26, nullptr);
     }
 };
 
 class Trie {
-    TrieNode *root, dummy;
+    TrieNode *root;
 public:
     Trie() {
-        root = &dummy;
+        root = new TrieNode();
     }
     
     void insert(string word) {
