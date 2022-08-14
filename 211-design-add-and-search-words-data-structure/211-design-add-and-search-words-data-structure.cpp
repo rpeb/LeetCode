@@ -1,92 +1,58 @@
-struct TrieNode {
-    vector<TrieNode*> next;
-    bool endOfWord;
-    TrieNode() {
+struct Node {
+    vector<Node*> next;
+    bool isWord;
+    Node() {
         next.assign(26, nullptr);
-        endOfWord = false;
+        isWord = false;
     }
 };
-
 class WordDictionary {
-    TrieNode *root;
-    bool searchHelper(TrieNode* root, int idx, string word) {
-        int n = word.size();
-        if (root && idx == n) return root->endOfWord;
+    Node* root;
+    bool searchHelper(Node* root, int idx, string word) {
         if (!root) return false;
-        TrieNode* curr = root;
-        int offset;
-        bool flag = false;
-        for (int i = idx; i < n; ++i) {
-            char c = word[i];
-            offset = c - 'a';
-            if (c != '.') {
-                if (curr->next[offset] == nullptr) {
-                    return false;
-                }
-                curr = curr->next[offset];
-            } else {
-                for (int j = 0; j < 26; ++j) {
-                    if (curr->next[j]) {
-                        flag = searchHelper(curr->next[j], i + 1, word);
-                    }
-                    if (flag) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
-        return curr->endOfWord;
-    }
-    
-    bool searchHelper1(string word, int idx, TrieNode* root) {
-        if (root and idx == word.size())
-            return root->endOfWord;
-        
-        if (!root)
-            return false;
+        if (idx == word.size()) return root->isWord;
         int n = word.size();
-        TrieNode* curr = root;
-        bool temp = false;
+        Node* curr = root;
+        char c;
+        int offset;
         for (int i = idx; i < n; ++i) {
-            if (word[i] != '.') {
-                if (!curr->next[word[i] - 'a'])
-                    return false;
-                curr = curr->next[word[i]-'a'];
-            } else {
-                for (int j = 0; j < 26; ++j) {
-                    if (curr->next[j]) {
-                        temp = searchHelper1(word, i+1, curr->next[j]);
+            c = word[i];
+            offset = c - 'a';
+            if (c == '.') {
+                for (auto node: curr->next) {
+                    if (node) {
+                        if (searchHelper(node, i + 1, word)) {
+                            return true;
+                        }
                     }
-                    if (temp)
-                        return true;
                 }
                 return false;
             }
+            if (curr->next[offset] == nullptr) {
+                return false;
+            }
+            curr = curr->next[offset];
         }
-        return curr->endOfWord;
+        return curr->isWord;
     }
 public:
     WordDictionary() {
-        root = new TrieNode();
+        root = new Node();
     }
     
     void addWord(string word) {
-        TrieNode* curr = root;
-        int idx;
+        Node* curr = root;
         for (char c: word) {
-            idx = c - 'a';
-            if (curr->next[idx] == nullptr) {
-                curr->next[idx] = new TrieNode();
+            if (curr->next[c - 'a'] == nullptr) {
+                curr->next[c - 'a'] = new Node();
             }
-            curr = curr->next[idx];
+            curr = curr->next[c - 'a'];
         }
-        curr->endOfWord = true;
+        curr->isWord = true;
     }
     
     bool search(string word) {
-        // return searchHelper(root, 0, word);
-        return searchHelper1(word, 0, root);
+        return searchHelper(root, 0, word);
     }
 };
 
