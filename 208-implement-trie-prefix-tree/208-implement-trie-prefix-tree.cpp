@@ -1,54 +1,48 @@
-struct TrieNode {
-    vector<TrieNode*> children;
-    bool endOfWord;
-    TrieNode() {
-        endOfWord = false;
-        children.assign(26, nullptr);
+struct Node {
+    vector<Node*> next;
+    bool isWord;
+    Node() {
+        next.assign(26, nullptr);
+        isWord = false;
     }
 };
 
 class Trie {
-    TrieNode *root;
+    Node* root;
 public:
     Trie() {
-        root = new TrieNode();
+        root = new Node();
     }
     
     void insert(string word) {
-        TrieNode* curr = root;
-        int idx;
+        Node* curr = root;
         for (char c: word) {
-            idx = c - 'a';
-            if (curr->children[idx] == nullptr) {
-                curr->children[idx] = new TrieNode();
+            if (curr->next[c - 'a'] == nullptr) {
+                curr->next[c - 'a'] = new Node();
             }
-            curr = curr->children[idx];
+            curr = curr->next[c - 'a'];
         }
-        curr->endOfWord = true;
+        curr->isWord = true;
     }
     
     bool search(string word) {
-        TrieNode* curr = root;
-        int idx;
+        Node* curr = root;
         for (char c: word) {
-            idx = c - 'a';
-            if (curr->children[idx] == nullptr) {
+            if (curr->next[c - 'a'] == nullptr) {
                 return false;
             }
-            curr = curr->children[idx];
+            curr = curr->next[c - 'a'];
         }
-        return curr->endOfWord;
+        return curr->isWord;
     }
     
     bool startsWith(string prefix) {
-        TrieNode* curr = root;
-        int idx;
+        Node* curr = root;
         for (char c: prefix) {
-            idx = c - 'a';
-            if (curr->children[idx] == nullptr) {
+            if (curr->next[c - 'a'] == nullptr) {
                 return false;
             }
-            curr = curr->children[idx];
+            curr = curr->next[c - 'a'];
         }
         return true;
     }
