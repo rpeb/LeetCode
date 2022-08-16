@@ -1,7 +1,7 @@
 class Solution {
 public:
     int edgeScore(vector<int>& edges) {
-        unordered_map<long,long> edgeScores;
+        unordered_map<int,long> edgeScores;
         long maxEdgeScore = 0;
         int ans;
         int n = edges.size();
