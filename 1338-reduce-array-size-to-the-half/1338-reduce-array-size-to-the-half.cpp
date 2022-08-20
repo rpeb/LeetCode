@@ -1,17 +1,22 @@
 class Solution {
 public:
     int minSetSize(vector<int>& arr) {
-        unordered_map<int,int> freq;
-        priority_queue<int> pq;
         int n = arr.size();
-        for (int a: arr) {
-            freq[a]++;
+        unordered_map<int,int> m;
+        for (int& a: arr) {
+            m[a]++;
         }
-        for (auto f: freq) {
-            pq.push(f.second);
+        // 3 -> 4
+        // 5 -> 3
+        // 2 -> 2
+        // 7 -> 1
+        
+        // max heap
+        priority_queue<int> pq;
+        for (auto x: m) {
+            pq.push(x.second);
         }
-        int removed = 0;
-        int ans = 0;
+        int ans = 0, removed = 0;
         while (removed * 2 < n) {
             removed += pq.top();
             pq.pop();
