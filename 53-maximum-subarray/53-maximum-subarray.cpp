@@ -1,22 +1,18 @@
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        int s = 0;
-        int n = nums.size();
-        int m = INT_MIN;
+        int maxSumSoFar = 0;
+        int res = INT_MIN;
         bool allNegative = true;
-        int maxElement = INT_MIN;
-        for (int i = 0; i < n; ++i) {
-            if (nums[i] >= 0) {
-                allNegative = false;
-            }
-            s += nums[i];
-            m = max(m,s);
-            if (s < 0)
-                s = 0;
+        int maxElement = nums[0];
+        for (int& num: nums) {
+            if (num >= 0) allNegative = false;
+            maxSumSoFar += num;
+            maxSumSoFar = max(0, maxSumSoFar);
+            res = max(res, maxSumSoFar);
             
-            maxElement = max(maxElement, nums[i]);
+            maxElement = max(maxElement, num);
         }
-        return allNegative ? maxElement : m;
+        return allNegative ? maxElement: res;
     }
 };
