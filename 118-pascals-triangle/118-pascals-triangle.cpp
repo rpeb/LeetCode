@@ -1,27 +1,33 @@
 class Solution {
-public:
-    vector<vector<int>> generate(int numRows) {
-        if (numRows == 1)
-            return {{1}};
-        if (numRows == 2) 
-            return {{1},{1,1}};
-        
-        // prepare first 2 rows
-        vector<vector<int>> base;
-        base.push_back({1});
-        base.push_back({1,1});
-        while (numRows > 2) {
-            vector<int> lastRow = base.back();
-            int n = lastRow.size();
-            vector<int> tmp;
-            tmp.push_back(1);
-            for (int i = 0; i < n-1; ++i) {
-                tmp.push_back(lastRow[i] + lastRow[i+1]);
-            }
-            tmp.push_back(1);
-            base.push_back(tmp);
-            numRows--;
+    void print(vector<int>& v) {
+        for (auto x: v) {
+            cout << x << " ";
         }
-        return base;
+        cout << "\n";
+    }
+public:
+    vector<vector<int>> generate(int rows) {
+        vector<vector<int>> res;
+        res.push_back({1});
+        if (rows == 1) {
+            return res;
+        }
+        res.push_back({1,1});
+        if (rows == 2) {
+            return res;
+        }
+        for (int i = 0; i < rows - 2; ++i) {
+            vector<int> last = res.back();
+            int lastSize = last.size();
+            vector<int> curr(lastSize + 1);
+            curr[0] = 1;
+            for (int j = 1; j < lastSize; ++j) {
+                curr[j] = last[j-1] + last[j];
+            }
+            curr[lastSize] = 1;
+            // print(curr);
+            res.push_back(curr);
+        }
+        return res;
     }
 };
