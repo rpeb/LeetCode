@@ -1,10 +1,4 @@
 class Solution {
-    void print(vector<int>& v) {
-        for (auto x: v) {
-            cout << x << " ";
-        }
-        cout << "\n";
-    }
 public:
     vector<vector<int>> generate(int rows) {
         vector<vector<int>> res;
@@ -25,7 +19,6 @@ public:
                 curr[j] = last[j-1] + last[j];
             }
             curr[lastSize] = 1;
-            // print(curr);
             res.push_back(curr);
         }
         return res;
