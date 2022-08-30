@@ -4,21 +4,20 @@ class Solution {
         int n = grid[0].size();
         queue<pair<int,int>> q;
         q.push({i,j});
-        int row[] = {-1,0,1,0};
-        int col[] = {0,1,0,-1};
+        int dirs[] = {0,-1,0,1,0};
         while (!q.empty()) {
-            auto f = q.front(); q.pop();
-            int x = f.first;
-            int y = f.second;
+            pair<int,int> p = q.front();
+            q.pop();
+            int x = p.first;
+            int y = p.second;
             grid[x][y] = '0';
-            for (int p = 0; p < 4; ++p) {
-                int r = x+row[p];
-                int c = y+col[p];
+            for (int d = 0; d < 4; ++d) {
+                int r = x + dirs[d];
+                int c = y + dirs[d+1];
                 if (r >= 0 && r < m && c >= 0 && c < n && grid[r][c] == '1') {
-                    grid[r][c] = '0';
                     q.push({r,c});
+                    grid[r][c] = '0';
                 }
-                    
             }
         }
     }
