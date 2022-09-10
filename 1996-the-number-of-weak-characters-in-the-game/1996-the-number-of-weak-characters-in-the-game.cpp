@@ -8,13 +8,14 @@ class Solution {
 public:
     int numberOfWeakCharacters(vector<vector<int>>& properties) {
         sort(properties.begin(), properties.end(), comp);
-          int mtn = INT_MIN; 
-          int ans = 0;
-          for (int i = properties.size() - 1; i >= 0; i--) {
-               if (properties[i][1] < mtn)
-                    ans++;
-               mtn = max(mtn, properties[i][1]);
-          }
-          return ans;
+        int n = properties.size();
+        int maxTillNow = INT_MIN; 
+        int weak = 0;
+        for (int i = n - 1; i >= 0; i--) {
+           if (properties[i][1] < maxTillNow)
+                weak++;
+           maxTillNow = max(maxTillNow, properties[i][1]);
+        }
+        return weak;
     }
 };
