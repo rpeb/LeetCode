@@ -24,12 +24,10 @@ public:
                 q.pop();
                 int f = front.first;
                 int s = front.second;
-                // cout << "f = " << f << ", s = " << s << "\n";
                 for (int d = 0; d < 4; ++d) {
                     int x = f + dirs[d];
                     int y = s + dirs[d+1];
                     if (min(x,y) >= 0 && x < m && y < n && visited[x][y] == 0) {
-                        // cout << "m = " << m << ", n = " << n << "\n";
                         q.push({x,y});
                         visited[x][y] = 1;
                         mat[x][y] = dist;
